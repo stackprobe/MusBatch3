@@ -1,23 +1,16 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-namespace HLTStudio
+﻿namespace HLTStudio
 {
 	partial class BusyDlg
 	{
-		/// /////////
-		/// /////////////
-		/// //////////
+		/// <summary>
+		/// 必要なデザイナー変数です。
+		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 
-		/// /////////
-		/// ///////////////////////
-		/// //////////
-		/// ////// ///////////////////// //////////// ////////////// ///// ///////////
+		/// <summary>
+		/// 使用中のリソースをすべてクリーンアップします。
+		/// </summary>
+		/// <param name="disposing">マネージ リソースが破棄される場合 true、破棄されない場合は false です。</param>
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing && (components != null))
@@ -27,12 +20,12 @@ namespace HLTStudio
 			base.Dispose(disposing);
 		}
 
-		#region /////// //// //////////////
+		#region Windows フォーム デザイナーで生成されたコード
 
-		/// /////////
-		/// ///// /////////////////////////
-		/// /// /////////////////
-		/// //////////
+		/// <summary>
+		/// デザイナー サポートに必要なメソッドです。このメソッドの内容を
+		/// コード エディターで変更しないでください。
+		/// </summary>
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
@@ -42,7 +35,7 @@ namespace HLTStudio
 			this.progressBar1 = new System.Windows.Forms.ProgressBar();
 			this.SuspendLayout();
 			// 
-			// //////
+			// label1
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(49, 35);
@@ -51,12 +44,12 @@ namespace HLTStudio
 			this.label1.TabIndex = 0;
 			this.label1.Text = "バッチファイルを作成しています...";
 			// 
-			// /////////
+			// MainTimer
 			// 
 			this.MainTimer.Enabled = true;
 			this.MainTimer.Tick += new System.EventHandler(this.MainTimer_Tick);
 			// 
-			// ////////////
+			// progressBar1
 			// 
 			this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -66,7 +59,7 @@ namespace HLTStudio
 			this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
 			this.progressBar1.TabIndex = 1;
 			// 
-			// ///////
+			// BusyDlg
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -98,7 +91,3 @@ namespace HLTStudio
 		private System.Windows.Forms.ProgressBar progressBar1;
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

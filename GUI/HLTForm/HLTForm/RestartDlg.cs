@@ -1,11 +1,4 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,13 +11,13 @@ namespace HLTStudio
 {
 	public partial class RestartDlg : Form
 	{
-		public int RemainingTime = 50; // // // /// ///
+		public int RemainingTime = 50; // 単位 == 100 ミリ秒
 
-		// ///// ///
+		// <---- prm
 
 		public bool OkPressed = false;
 
-		// ///// ///
+		// <---- ret
 
 		public RestartDlg()
 		{
@@ -44,7 +37,7 @@ namespace HLTStudio
 
 		private void RestartDlg_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			// ////
+			// noop
 		}
 
 		private void RestartDlg_FormClosed(object sender, FormClosedEventArgs e)
@@ -76,7 +69,7 @@ namespace HLTStudio
 
 			try
 			{
-				if (Gnd.I.RestartDlgTopMost && 1 <= this.MT_Count && this.MT_Count <= 3) // ///
+				if (Gnd.I.RestartDlgTopMost && 1 <= this.MT_Count && this.MT_Count <= 3) // 2bs
 				{
 					this.TopMost = this.MT_Count % 2 == 1;
 				}
@@ -105,7 +98,3 @@ namespace HLTStudio
 		}
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

@@ -1,11 +1,4 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,13 +17,13 @@ namespace HLTStudio.Tools
 		private string _path = "/";
 		private string _version = HTTP_11;
 		private Dictionary<string, string> _headerFields = new Dictionary<string, string>();
-		private byte[] _body = null; // //// // //// /// //// // ////
-		private int _sendTimeoutMillis = 20000; // / // ////////
-		private int _recvTimeoutMillis = 20000; // / // ////////
-		private string _proxyDomain = null; // //// // // /////
+		private byte[] _body = null; // null -> GET, not null -> POST
+		private int _sendTimeoutMillis = 20000; // 0 -> infinite
+		private int _recvTimeoutMillis = 20000; // 0 -> infinite
+		private string _proxyDomain = null; // null -> no proxy
 		private int _proxyPortNo = -1;
 		private bool _useIEProxy = false;
-		private bool _head; // //// // ///// ///// // /// // ////
+		private bool _head; // true -> HEAD, false -> GET or POST
 
 		public HttpRequest()
 		{ }
@@ -40,7 +33,7 @@ namespace HLTStudio.Tools
 			this.SetUrl(url);
 		}
 
-		public int ResBodySizeMax = 20000000; // // //
+		public int ResBodySizeMax = 20000000; // 20 MB
 
 		public void SetUrl(string url)
 		{
@@ -265,7 +258,3 @@ namespace HLTStudio.Tools
 		}
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

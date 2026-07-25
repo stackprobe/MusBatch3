@@ -1,23 +1,16 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-namespace HLTStudio
+﻿namespace HLTStudio
 {
 	partial class MainWin
 	{
-		/// /////////
-		/// /////////////
-		/// //////////
+		/// <summary>
+		/// 必要なデザイナー変数です。
+		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 
-		/// /////////
-		/// ///////////////////////
-		/// //////////
-		/// ////// ///////////////////// //////////// ////////////// ///// ///////////
+		/// <summary>
+		/// 使用中のリソースをすべてクリーンアップします。
+		/// </summary>
+		/// <param name="disposing">マネージ リソースが破棄される場合 true、破棄されない場合は false です。</param>
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing && (components != null))
@@ -27,12 +20,12 @@ namespace HLTStudio
 			base.Dispose(disposing);
 		}
 
-		#region /////// //// //////////////
+		#region Windows フォーム デザイナーで生成されたコード
 
-		/// /////////
-		/// ///// /////////////////////////
-		/// /// /////////////////
-		/// //////////
+		/// <summary>
+		/// デザイナー サポートに必要なメソッドです。このメソッドの内容を
+		/// コード エディターで変更しないでください。
+		/// </summary>
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
@@ -64,7 +57,7 @@ namespace HLTStudio
 			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// //////////
+			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.アプリケーションAToolStripMenuItem,
@@ -75,7 +68,7 @@ namespace HLTStudio
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
-			// //////////////////////////
+			// アプリケーションAToolStripMenuItem
 			// 
 			this.アプリケーションAToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.終了XToolStripMenuItem});
@@ -83,14 +76,14 @@ namespace HLTStudio
 			this.アプリケーションAToolStripMenuItem.Size = new System.Drawing.Size(104, 20);
 			this.アプリケーションAToolStripMenuItem.Text = "アプリケーション(&A)";
 			// 
-			// ////////////////////
+			// 終了XToolStripMenuItem
 			// 
 			this.終了XToolStripMenuItem.Name = "終了XToolStripMenuItem";
 			this.終了XToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
 			this.終了XToolStripMenuItem.Text = "終了(&X)";
 			this.終了XToolStripMenuItem.Click += new System.EventHandler(this.終了XToolStripMenuItem_Click);
 			// 
-			// ////////////////////
+			// 設定SToolStripMenuItem
 			// 
 			this.設定SToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.常に手前に表示するTToolStripMenuItem,
@@ -101,33 +94,33 @@ namespace HLTStudio
 			this.設定SToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
 			this.設定SToolStripMenuItem.Text = "設定(&S)";
 			// 
-			// ///////////////////////////
+			// 常に手前に表示するTToolStripMenuItem
 			// 
 			this.常に手前に表示するTToolStripMenuItem.Name = "常に手前に表示するTToolStripMenuItem";
 			this.常に手前に表示するTToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
 			this.常に手前に表示するTToolStripMenuItem.Text = "常に手前に表示する(&T)";
 			this.常に手前に表示するTToolStripMenuItem.Click += new System.EventHandler(this.常に手前に表示するTToolStripMenuItem_Click);
 			// 
-			// //////////////////////////
+			// 繰り返し再生するRToolStripMenuItem
 			// 
 			this.繰り返し再生するRToolStripMenuItem.Name = "繰り返し再生するRToolStripMenuItem";
 			this.繰り返し再生するRToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
 			this.繰り返し再生するRToolStripMenuItem.Text = "繰り返し再生する(&R)";
 			this.繰り返し再生するRToolStripMenuItem.Click += new System.EventHandler(this.繰り返し再生するRToolStripMenuItem_Click);
 			// 
-			// //////////////////
+			// toolStripMenuItem1
 			// 
 			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
 			this.toolStripMenuItem1.Size = new System.Drawing.Size(182, 6);
 			// 
-			// ////////////////////////
+			// その他の設定OToolStripMenuItem
 			// 
 			this.その他の設定OToolStripMenuItem.Name = "その他の設定OToolStripMenuItem";
 			this.その他の設定OToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
 			this.その他の設定OToolStripMenuItem.Text = "その他の設定(&O)";
 			this.その他の設定OToolStripMenuItem.Click += new System.EventHandler(this.その他の設定OToolStripMenuItem_Click);
 			// 
-			// /////////
+			// groupBox1
 			// 
 			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -142,7 +135,7 @@ namespace HLTStudio
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "記録";
 			// 
-			// ///////
+			// Btn記録停止
 			// 
 			this.Btn記録停止.Font = new System.Drawing.Font("メイリオ", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.Btn記録停止.Location = new System.Drawing.Point(127, 94);
@@ -153,7 +146,7 @@ namespace HLTStudio
 			this.Btn記録停止.UseVisualStyleBackColor = true;
 			this.Btn記録停止.Click += new System.EventHandler(this.Btn記録停止_Click);
 			// 
-			// ///////
+			// Btn記録開始
 			// 
 			this.Btn記録開始.Font = new System.Drawing.Font("メイリオ", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.Btn記録開始.Location = new System.Drawing.Point(6, 94);
@@ -164,7 +157,7 @@ namespace HLTStudio
 			this.Btn記録開始.UseVisualStyleBackColor = true;
 			this.Btn記録開始.Click += new System.EventHandler(this.Btn記録開始_Click);
 			// 
-			// //////
+			// Cmbマウス
 			// 
 			this.Cmbマウス.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -179,7 +172,7 @@ namespace HLTStudio
 			this.Cmbマウス.Size = new System.Drawing.Size(236, 28);
 			this.Cmbマウス.TabIndex = 1;
 			// 
-			// ////////
+			// Cmbキーボード
 			// 
 			this.Cmbキーボード.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -193,7 +186,7 @@ namespace HLTStudio
 			this.Cmbキーボード.Size = new System.Drawing.Size(236, 28);
 			this.Cmbキーボード.TabIndex = 0;
 			// 
-			// /////////
+			// groupBox2
 			// 
 			this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -207,7 +200,7 @@ namespace HLTStudio
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "再生";
 			// 
-			// ///////////
+			// Btnもう一度再生する
 			// 
 			this.Btnもう一度再生する.Location = new System.Drawing.Point(6, 122);
 			this.Btnもう一度再生する.Name = "Btnもう一度再生する";
@@ -217,7 +210,7 @@ namespace HLTStudio
 			this.Btnもう一度再生する.UseVisualStyleBackColor = true;
 			this.Btnもう一度再生する.Click += new System.EventHandler(this.Btnもう一度再生する_Click);
 			// 
-			// ///////
+			// Btn再生中断
 			// 
 			this.Btn再生中断.Font = new System.Drawing.Font("メイリオ", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.Btn再生中断.Location = new System.Drawing.Point(127, 26);
@@ -228,7 +221,7 @@ namespace HLTStudio
 			this.Btn再生中断.UseVisualStyleBackColor = true;
 			this.Btn再生中断.Click += new System.EventHandler(this.Btn再生中断_Click);
 			// 
-			// ///////
+			// Btn再生開始
 			// 
 			this.Btn再生開始.Font = new System.Drawing.Font("メイリオ", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.Btn再生開始.Location = new System.Drawing.Point(6, 26);
@@ -239,7 +232,7 @@ namespace HLTStudio
 			this.Btn再生開始.UseVisualStyleBackColor = true;
 			this.Btn再生開始.Click += new System.EventHandler(this.Btn再生開始_Click);
 			// 
-			// ////////////
+			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SouthText});
@@ -250,18 +243,18 @@ namespace HLTStudio
 			this.statusStrip1.TabIndex = 4;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
-			// /////////
+			// SouthText
 			// 
 			this.SouthText.Name = "SouthText";
 			this.SouthText.Size = new System.Drawing.Size(86, 17);
 			this.SouthText.Text = "準備しています...";
 			// 
-			// /////////
+			// MainTimer
 			// 
 			this.MainTimer.Enabled = true;
 			this.MainTimer.Tick += new System.EventHandler(this.MainTimer_Tick);
 			// 
-			// /////////////
+			// BtnOpenOutDir
 			// 
 			this.BtnOpenOutDir.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -274,7 +267,7 @@ namespace HLTStudio
 			this.BtnOpenOutDir.UseVisualStyleBackColor = true;
 			this.BtnOpenOutDir.Click += new System.EventHandler(this.BtnOpenOutDir_Click);
 			// 
-			// ///////
+			// MainWin
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -334,6 +327,3 @@ namespace HLTStudio
 	}
 }
 
-//
-// <<< Processed by SolutionConv
-//

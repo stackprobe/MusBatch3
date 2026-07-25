@@ -1,11 +1,4 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,17 +6,17 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 
-// / //// / ///////////////
+// ^ sync @ SaveLoadDialogs
 
 namespace HLTStudio
 {
-	// //// / / ///////////////
+	// sync > @ SaveLoadDialogs
 
 	public static class SaveLoadDialogs
 	{
 		public static string SaveFile(string title, string filterString, string initialFile)
 		{
-			// //////////// // ////////////// ///
+			// filterString == 拡張子1.拡張子2.拡張子3 ...
 
 			string[] exts = filterString.Split('.');
 
@@ -37,7 +30,7 @@ namespace HLTStudio
 
 		public static string LoadFile(string title, string filterString, string initialFile)
 		{
-			// //////////// // /////////////////// ///
+			// filterString == [総称:]拡張子1.拡張子2.拡張子3 ...
 
 			string genericName = null;
 
@@ -89,7 +82,7 @@ namespace HLTStudio
 				{
 					dlg.Title = title;
 					dlg.Filter = GetFilter(filterString);
-					///////////////// / /////////////// // ///
+					//dlg.FilterIndex = GF_FilterIndex; // del
 					dlg.FilterIndex = 1;
 					dlg.InitialDirectory = initialDir;
 					dlg.FileName = initialFile;
@@ -113,15 +106,15 @@ namespace HLTStudio
 			return null;
 		}
 
-		///////// ////// /// ///////////////
+		//private static int GF_FilterIndex;
 
 		private static string GetFilter(string filterString)
 		{
-			// //////////// // //////////////////////////////// ///
+			// filterString == [名前1:]拡張子1.[名前2:]拡張子2.[名前3:]拡張子3 ...
 
 			StringBuilder buff = new StringBuilder();
 
-			//////////////// / //
+			//GF_FilterIndex = 1;
 
 			foreach (string fExtension in filterString.Split('.').Select(extension => extension.Trim()).Where(extension => extension != ""))
 			{
@@ -138,7 +131,7 @@ namespace HLTStudio
 					}
 				}
 
-				///////////////////
+				//GF_FilterIndex++;
 
 				buff.Append(name + "ファイル(*." + extension + ")|*." + extension + "|");
 			}
@@ -209,9 +202,5 @@ namespace HLTStudio
 		}
 	}
 
-	// / ////
+	// < sync
 }
-
-//
-// <<< Processed by SolutionConv
-//

@@ -19,7 +19,7 @@
 
 ■動作環境
 
-　Windows 10 Pro または Windows 10 Home
+　Windows
 
 
 ■インストール方法
@@ -282,11 +282,4 @@
 ■取り扱い種別
 
 　フリーソフト
-
-
-■作者への連絡先
-
-　stackprobes@gmail.com
-
-　不具合や要望など気軽にご連絡下さい。
 

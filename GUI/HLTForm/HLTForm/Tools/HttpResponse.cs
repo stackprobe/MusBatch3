@@ -1,11 +1,4 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +11,7 @@ namespace HLTStudio.Tools
 		private const int CR = 0x0d;
 		private const int LF = 0x0a;
 		private const int HEADER_LINE_LENMAX = 65536;
-		private const int HEADER_SIZE_MAX = 500000; // /// //
+		private const int HEADER_SIZE_MAX = 500000; // 500 KB
 
 		private NetworkStream _rs;
 		private int _resBodySizeMax;
@@ -183,7 +176,7 @@ namespace HLTStudio.Tools
 
 					if (extPos != -1)
 					{
-						line = line.Substring(0, extPos); // ////// /////////////////
+						line = line.Substring(0, extPos); // ignore chunked-extension
 					}
 					line = line.Trim();
 					int partSize = Convert.ToInt32(line, 16);
@@ -204,10 +197,10 @@ namespace HLTStudio.Tools
 					parts.Add(part);
 					totalSize += partSize;
 
-					_rs.ReadByte(); // //
-					_rs.ReadByte(); // //
+					_rs.ReadByte(); // CR
+					_rs.ReadByte(); // LF
 				}
-				while (1 <= this.ReadLine().Length) ; // ////// //////////////
+				while (1 <= this.ReadLine().Length) ; // ignore chunked-footer
 				_body = new byte[totalSize];
 				int wPos = 0;
 
@@ -269,7 +262,3 @@ namespace HLTStudio.Tools
 		}
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

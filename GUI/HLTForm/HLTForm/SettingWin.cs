@@ -1,11 +1,4 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,7 +25,7 @@ namespace HLTStudio
 
 		private void SettingWin_Shown(object sender, EventArgs e)
 		{
-			// //////////
+			// refresh_ui
 			{
 				this.RecStartMin_CheckedChanged(null, null);
 				this.StartMin_CheckedChanged(null, null);
@@ -43,7 +36,7 @@ namespace HLTStudio
 
 		private void SettingWin_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			// ////
+			// noop
 		}
 
 		private void SettingWin_FormClosed(object sender, FormClosedEventArgs e)
@@ -51,7 +44,7 @@ namespace HLTStudio
 			this.SaveData();
 		}
 
-		// //// ////////// ////
+		// ---- 全フィールドなめる系 ----
 
 		private void LoadData()
 		{
@@ -70,7 +63,7 @@ namespace HLTStudio
 			this.StartMin.Checked = Gnd.I.StartMin;
 			this.EndUnmin.Checked = Gnd.I.EndUnmin;
 			this.RCtrl中断.Checked = Gnd.I.RCtrl中断;
-			// ///////
+			// ここへ追加..
 		}
 
 		private void SaveData()
@@ -90,7 +83,7 @@ namespace HLTStudio
 			Gnd.I.StartMin = this.StartMin.Checked;
 			Gnd.I.EndUnmin = this.EndUnmin.Checked;
 			Gnd.I.RCtrl中断 = this.RCtrl中断.Checked;
-			// ///////
+			// ここへ追加..
 		}
 
 		private void DoExport(string file)
@@ -112,7 +105,7 @@ namespace HLTStudio
 			xml.Children.Add(new XNode("StartMin", StringTools.ToString(this.StartMin.Checked)));
 			xml.Children.Add(new XNode("EndUnmin", StringTools.ToString(this.EndUnmin.Checked)));
 			xml.Children.Add(new XNode("RCtrlChuudan", StringTools.ToString(this.RCtrl中断.Checked)));
-			// ///////
+			// ここへ追加..
 
 			xml.Save(file);
 		}
@@ -136,10 +129,10 @@ namespace HLTStudio
 			this.StartMin.Checked = StringTools.ToFlag(xml.GetNode("StartMin").Value);
 			this.EndUnmin.Checked = StringTools.ToFlag(xml.GetNode("EndUnmin").Value);
 			this.RCtrl中断.Checked = StringTools.ToFlag(xml.GetNode("RCtrlChuudan").Value);
-			// ///////
+			// ここへ追加..
 		}
 
-		// ////
+		// ----
 
 		private void BtnReset_Click(object sender, EventArgs e)
 		{
@@ -209,7 +202,7 @@ namespace HLTStudio
 
 		private void CommonKeyPress(KeyPressEventArgs e)
 		{
-			if (e.KeyChar == (char)13) // /////
+			if (e.KeyChar == (char)13) // enter
 			{
 				SendKeys.Send("{TAB}");
 				e.Handled = true;
@@ -320,26 +313,26 @@ namespace HLTStudio
 					if (destFile != null)
 					{
 #if false
-						// /////////////////////////////
-						/
-							////////////////
-								////////////////////
-								////////////////
-								/////////////////////
-								//////////////////////
-								//
-							/////////
-						/
-						// //////////////////////////// ///// ////// ////// ///// ////// // //////
-						/
-							////////////////
-								////////// ////////////////////
-								////////////////
-								/////////////////////
-								//////////////////////
-								//
-							/////////
-						/
+						if (destFile.StartsWith("\\\\"))
+						{
+							MessageBox.Show(
+								"ネットワークパスは使用できません。",
+								"ファイル名に問題があります",
+								MessageBoxButtons.OK,
+								MessageBoxIcon.Warning
+								);
+							continue;
+						}
+						if (JString.IsJString(destFile, true, false, false, true, false) == false)
+						{
+							MessageBox.Show(
+								"Shift_JIS で表現出来ない文字は使用できません。",
+								"ファイル名に問題があります",
+								MessageBoxButtons.OK,
+								MessageBoxIcon.Warning
+								);
+							continue;
+						}
 #endif
 						this.DoExport(destFile);
 					}
@@ -362,68 +355,68 @@ namespace HLTStudio
 		{
 			try
 			{
-				/////////////////////////////
+				//OpenFileDialogクラスのインスタンスを作成
 				using (OpenFileDialog ofd = new OpenFileDialog())
 				{
-					////////////////
-					///////////////////////////
+					//はじめのファイル名を指定する
+					//はじめに「ファイル名」で表示される文字列を指定する
 					ofd.FileName = "*.xml";
-					////////////////////
-					/////////////////////////////////
-					////////////////////// / ////////////////////////////////////////////////////////////
+					//はじめに表示されるフォルダを指定する
+					//指定しない（空の文字列）の時は、現在のディレクトリが表示される
+					//ofd.InitialDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 					ofd.InitialDirectory = GetSettingDir();
-					/////////////////////////
-					//////////////////////
+					//[ファイルの種類]に表示される選択肢を指定する
+					//指定しないとすべてのファイルが表示される
 					ofd.Filter =
 						"設定ファイル(*.xml)|*.xml|すべてのファイル(*.*)|*.*";
-					//////////////////////////////////////////////////////////
-					////////////////
-					/////////////////////////
-					// ///////////////////
+					//"HTMLファイル(*.html;*.htm)|*.html;*.htm|すべてのファイル(*.*)|*.*";
+					//[ファイルの種類]ではじめに
+					//「すべてのファイル」が選択されているようにする
+					// フィルタの何番目かってことみたい...
 					ofd.FilterIndex = 0;
-					///////////
+					//タイトルを設定する
 					ofd.Title = "インポートする設定ファイルを選択して下さい";
-					////////////////////////////////////
+					//ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
 					ofd.RestoreDirectory = true;
-					/////////////////////////////
-					////////////////////////
+					//存在しないファイルの名前が指定されたとき警告を表示する
+					//デフォルトでTrueなので指定する必要はない
 					ofd.CheckFileExists = true;
-					////////////////////////
-					////////////////////////
+					//存在しないパスが指定されたとき警告を表示する
+					//デフォルトでTrueなので指定する必要はない
 					ofd.CheckPathExists = true;
 
-					////////////
-					if (ofd.ShowDialog() == DialogResult.OK) // ///// ///
+					//ダイアログを表示する
+					if (ofd.ShowDialog() == DialogResult.OK) // using ofd
 					{
-						Directory.SetCurrentDirectory(BootTools.SelfDir); // ///
+						Directory.SetCurrentDirectory(BootTools.SelfDir); // 2bs
 
 						string selFile = ofd.FileName;
 
 #if false
-						// ////////////////////////////
-						/
-							////////////////
-								//////////////////
-								////////////////
-								/////////////////////
-								//////////////////////
-								//
-							///////
-						/
-						// /////////////////////////// ///// ////// ////// ///// ////// // //////
-						/
-							////////////////
-								////////// ///////////////////////
-								////////////////
-								/////////////////////
-								//////////////////////
-								//
-							///////
-						/
+						if (selFile.StartsWith("\\\\"))
+						{
+							MessageBox.Show(
+								"ネットワークパスは開けません。",
+								"ファイル名に問題があります",
+								MessageBoxButtons.OK,
+								MessageBoxIcon.Warning
+								);
+							return;
+						}
+						if (JString.IsJString(selFile, true, false, false, true, false) == false)
+						{
+							MessageBox.Show(
+								"Shift_JIS で表現出来ない文字を含むパスは開けません。",
+								"ファイル名に問題があります",
+								MessageBoxButtons.OK,
+								MessageBoxIcon.Warning
+								);
+							return;
+						}
 #endif
 						this.DoImport(selFile);
 					}
-					Directory.SetCurrentDirectory(BootTools.SelfDir); // ///
+					Directory.SetCurrentDirectory(BootTools.SelfDir); // 2bs
 				}
 			}
 			catch (Exception ex)
@@ -439,7 +432,3 @@ namespace HLTStudio
 		}
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

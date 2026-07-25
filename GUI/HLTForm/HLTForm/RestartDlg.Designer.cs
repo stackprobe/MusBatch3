@@ -1,23 +1,16 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-namespace HLTStudio
+﻿namespace HLTStudio
 {
 	partial class RestartDlg
 	{
-		/// /////////
-		/// /////////////
-		/// //////////
+		/// <summary>
+		/// 必要なデザイナー変数です。
+		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 
-		/// /////////
-		/// ///////////////////////
-		/// //////////
-		/// ////// ///////////////////// //////////// ////////////// ///// ///////////
+		/// <summary>
+		/// 使用中のリソースをすべてクリーンアップします。
+		/// </summary>
+		/// <param name="disposing">マネージ リソースが破棄される場合 true、破棄されない場合は false です。</param>
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing && (components != null))
@@ -27,12 +20,12 @@ namespace HLTStudio
 			base.Dispose(disposing);
 		}
 
-		#region /////// //// //////////////
+		#region Windows フォーム デザイナーで生成されたコード
 
-		/// /////////
-		/// ///// /////////////////////////
-		/// /// /////////////////
-		/// //////////
+		/// <summary>
+		/// デザイナー サポートに必要なメソッドです。このメソッドの内容を
+		/// コード エディターで変更しないでください。
+		/// </summary>
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
@@ -43,7 +36,7 @@ namespace HLTStudio
 			this.MainTimer = new System.Windows.Forms.Timer(this.components);
 			this.SuspendLayout();
 			// 
-			// /////
+			// BtnOk
 			// 
 			this.BtnOk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -55,7 +48,7 @@ namespace HLTStudio
 			this.BtnOk.UseVisualStyleBackColor = true;
 			this.BtnOk.Click += new System.EventHandler(this.BtnOk_Click);
 			// 
-			// /////////
+			// BtnCancel
 			// 
 			this.BtnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -67,7 +60,7 @@ namespace HLTStudio
 			this.BtnCancel.UseVisualStyleBackColor = true;
 			this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
 			// 
-			// ///////////
+			// MainMessage
 			// 
 			this.MainMessage.AutoSize = true;
 			this.MainMessage.Font = new System.Drawing.Font("メイリオ", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -77,12 +70,12 @@ namespace HLTStudio
 			this.MainMessage.TabIndex = 0;
 			this.MainMessage.Text = "準備しています...";
 			// 
-			// /////////
+			// MainTimer
 			// 
 			this.MainTimer.Enabled = true;
 			this.MainTimer.Tick += new System.EventHandler(this.MainTimer_Tick);
 			// 
-			// //////////
+			// RestartDlg
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -116,7 +109,3 @@ namespace HLTStudio
 		private System.Windows.Forms.Timer MainTimer;
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

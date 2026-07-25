@@ -1,11 +1,4 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,7 +28,7 @@ namespace HLTStudio.Tools
 
 			try
 			{
-				using (new FileStream(rFile, FileMode.Open, FileAccess.Read)) // //// ///// /
+				using (new FileStream(rFile, FileMode.Open, FileAccess.Read)) // read check !
 				{ }
 
 				this.MakeDivFiles(rFile);
@@ -49,7 +42,7 @@ namespace HLTStudio.Tools
 					this.MergeFile(divFile1, divFile2, divFile3);
 				}
 
-				using (new FileStream(wFile, FileMode.Create, FileAccess.Write)) // ///// ///// /
+				using (new FileStream(wFile, FileMode.Create, FileAccess.Write)) // write check !
 				{ }
 
 				switch ((int)(_wSerial - _rSerial))
@@ -209,7 +202,3 @@ namespace HLTStudio.Tools
 		protected abstract int Comp(Record_t a, Record_t b);
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

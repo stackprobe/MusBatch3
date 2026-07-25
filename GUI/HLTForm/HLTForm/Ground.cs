@@ -1,11 +1,4 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,16 +29,16 @@ namespace HLTStudio
 
 		public readonly string ConfFile = StringTools.Combine(BootTools.SelfDir, "GUI.conf");
 
-		// //// ///// ////
+		// ---- Items ----
 
 		public bool IgnoreVk16To18 = true;
 		public int LoopModeWaitSec = 5;
 		public bool RestartDlgTopMost = true;
 		public bool AntiScreenSaver = false;
 		public int ClearLogCycle = 1000;
-		// ///////
+		// ここへ追加..
 
-		// ////
+		// ----
 
 		public void LoadConf()
 		{
@@ -64,35 +57,35 @@ namespace HLTStudio
 				if (int.Parse(lines[c++]) != lines.Length)
 					throw new Exception("Bad element number");
 
-				// //// ///// ////
+				// ---- Items ----
 
 				IgnoreVk16To18 = int.Parse(lines[c++]) != 0;
-				LoopModeWaitSec = Utils.ToRange(int.Parse(lines[c++]), 1, 86400000); // / /// / //// ///
+				LoopModeWaitSec = Utils.ToRange(int.Parse(lines[c++]), 1, 86400000); // 1 sec ～ 1000 day
 				RestartDlgTopMost = int.Parse(lines[c++]) != 0;
 				AntiScreenSaver = int.Parse(lines[c++]) != 0;
-				ClearLogCycle = Utils.ToRange(int.Parse(lines[c++]), 10, 1000000000); // // / ////
-																					  // ///////
+				ClearLogCycle = Utils.ToRange(int.Parse(lines[c++]), 10, 1000000000); // 10 ～ IMAX
+																					  // ここへ追加..
 
-				// ////
+				// ----
 
-				// ////////
-				// // //
-				// ///////////////////////// // /////////////
-				// /////////// // ///////////////////////////////
-				// // //////////////////////////////
+				// 2019.7.2
+				// \e 排除
+				// 項目が追加されたとき、古い設定ファイルを読み込むと \e を項目として読んでしまう。
+				// この場合、例外(out of range)を投げてデフォルト値のままになってくれた方が良い。
+				// \e による行の過不足のチェックは有効要素数のチェックで代替する。
 
 				Utils.WriteLog("Conf...");
 
-				// //// ///// //// ///
+				// ---- Items ---- log
 
 				Utils.WriteLog(IgnoreVk16To18);
 				Utils.WriteLog(LoopModeWaitSec);
 				Utils.WriteLog(RestartDlgTopMost);
 				Utils.WriteLog(AntiScreenSaver);
 				Utils.WriteLog(ClearLogCycle);
-				// ///////
+				// ここへ追加..
 
-				// ////
+				// ----
 			}
 			catch (Exception e)
 			{
@@ -102,17 +95,17 @@ namespace HLTStudio
 
 		public readonly string DatFile = StringTools.Combine(BootTools.SelfDir, "GUI.dat");
 
-		public int MainWin_L = -IntTools.IMAX; // ///// // ///
+		public int MainWin_L = -IntTools.IMAX; // -IMAX == 未設定
 		public int MainWin_T = 0;
 		public bool SndInputBatLocal = false;
-		public int RecStrokeMillis = 150; // / / /////
-		public int RecClickMillis = 150; // / / /////
-		public int RecDblClickMillis = 200; // / / /////
+		public int RecStrokeMillis = 150; // 0 ～ 60000
+		public int RecClickMillis = 150; // 0 ～ 60000
+		public int RecDblClickMillis = 200; // 0 ～ 60000
 		public bool Recまとめ = false;
-		public int StrokeMillis = 30; // / / /////
-		public int ClickMillis = 30; // / / /////
-		public int DblClickMillis = 30; // / / /////
-		public int SamplingMillis = 10; // / / /////
+		public int StrokeMillis = 30; // 0 ～ 60000
+		public int ClickMillis = 30; // 0 ～ 60000
+		public int DblClickMillis = 30; // 0 ～ 60000
+		public int SamplingMillis = 10; // 1 ～ 60000
 		public bool RecStartMin = false;
 		public bool RecEndUnmin = false;
 		public bool RecRCtrl停止 = false;
@@ -140,7 +133,7 @@ namespace HLTStudio
 
 		public string OutDir = Path.Combine(BootTools.SelfDir, @"..\bat");
 
-		// //// ////////// ////
+		// ---- 全フィールドなめる系 ----
 
 		public void LoadData()
 		{
@@ -174,7 +167,7 @@ namespace HLTStudio
 				AlwaysTop = StringTools.ToFlag(lines[c++]);
 				LoopMode = StringTools.ToFlag(lines[c++]);
 				OutDir = EraseDq(lines[c++]);
-				// ///////
+				// ここへ追加..
 			}
 			catch (Exception e)
 			{
@@ -210,7 +203,7 @@ namespace HLTStudio
 				lines.Add(StringTools.ToString(AlwaysTop));
 				lines.Add(StringTools.ToString(LoopMode));
 				lines.Add("\"" + OutDir + "\"");
-				// ///////
+				// ここへ追加..
 
 				File.WriteAllLines(DatFile, lines, Encoding.UTF8);
 			}
@@ -220,7 +213,7 @@ namespace HLTStudio
 			}
 		}
 
-		// ////
+		// ----
 
 		private static string EraseDq(string str)
 		{
@@ -254,19 +247,15 @@ namespace HLTStudio
 			}
 		}
 
-		public Process Proc記録 = null; // //// // ///
-		public Process Proc再生 = null; // //// // ///
+		public Process Proc記録 = null; // null == 未実行
+		public Process Proc再生 = null; // null == 未実行
 
 		public readonly string RecFile = WorkBenchDir.I.MakePath();
 		public string LastRanBatFile = null;
 
 		public bool Is初回起動()
 		{
-			return File.Exists(DatFile) == false; // / //////////////////////
+			return File.Exists(DatFile) == false; // ? SaveData()を1度も実行していない。
 		}
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

@@ -1,11 +1,4 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +7,7 @@ namespace HLTStudio.Tools
 {
 	public class Nectar : IDisposable
 	{
-		private const string COMMON_ID = "{91ed4458-fe67-4093-a430-9dbf09db9904}"; // /////////////
+		private const string COMMON_ID = "{91ed4458-fe67-4093-a430-9dbf09db9904}"; // shared_uuid@g
 
 		private NamedEventData _evData;
 		private NamedEventData _evCtrl;
@@ -35,13 +28,13 @@ namespace HLTStudio.Tools
 			_timeoutMillis = timeoutMillis;
 		}
 
-		/// /////////
-		/// ///////////////////////
-		/// //////////
-		/// ////// ///////////////////////
+		/// <summary>
+		/// タイムアウト又は送信に失敗すると例外を投げる。
+		/// </summary>
+		/// <param name="message"></param>
 		public void Send(byte[] message)
 		{
-			// ///////////////////////////
+			// 前回正常終了しなかった可能性を考慮して、念のためクリア
 			{
 				_evData.WaitForMillis(0);
 				_evCtrl.WaitForMillis(0);
@@ -74,12 +67,12 @@ namespace HLTStudio.Tools
 
 			if (_evRecv.WaitForMillis(_timeoutMillis) == false)
 			{
-				// //////////
+				// 異常終了なのでクリア
 				{
 					_evData.WaitForMillis(0);
 					_evCtrl.WaitForMillis(0);
 					_evSend.WaitForMillis(0);
-					_evRecv.WaitForMillis(100); // //////////////////////////// /////// ///////////
+					_evRecv.WaitForMillis(100); // シビアなタイミングで受信された可能性を考慮して、受信側の _ecRecv セットを少しだけ待つ。
 				}
 
 				throw new Exception("送信タイムアウト");
@@ -90,10 +83,10 @@ namespace HLTStudio.Tools
 		private int _bChr = -1;
 		private int _bIndex = -1;
 
-		/// /////////
-		/// ///////////////////////
-		/// //////////
-		/// ///////////////////
+		/// <summary>
+		/// タイムアウト又は受信に失敗すると例外を投げる。
+		/// </summary>
+		/// <returns></returns>
 		public byte[] Recv()
 		{
 			for (; ; )
@@ -108,7 +101,7 @@ namespace HLTStudio.Tools
 				}
 				else if (_buff == null)
 				{
-					// ////
+					// noop
 				}
 				else if (ret == 3)
 				{
@@ -182,13 +175,13 @@ namespace HLTStudio.Tools
 
 			public Sender(string name)
 			{
-				_n = new Nectar(name, 30000); // // / // ///////////////////
+				_n = new Nectar(name, 30000); // 30 秒 -- 受信側が存在すること前提なので、長め。
 			}
 
-			/// /////////
-			/// ///////////////////////
-			/// //////////
-			/// ////// ///////////////////////
+			/// <summary>
+			/// タイムアウト又は送信に失敗すると例外を投げる。
+			/// </summary>
+			/// <param name="message"></param>
 			public void Send(byte[] message)
 			{
 				_n.Send(message);
@@ -210,7 +203,7 @@ namespace HLTStudio.Tools
 
 			public Recver(string name)
 			{
-				_n = new Nectar(name, 2000); // / / // ////////////////////////////////// /////////
+				_n = new Nectar(name, 2000); // 2 秒 -- タイムアウトしても送信中のメッセージは維持される。interrupt 確保のため、短め。
 			}
 
 			public void SetRecvSizeMax(int recvSizeMax)
@@ -219,12 +212,12 @@ namespace HLTStudio.Tools
 			}
 
 
-			/// /////////
-			/// //////////
-			/// //////////
-			/// ////// /////////////////////////////
-			/// ///////////// // ///////////////////////
-			public byte[] Recv(int timeoutMillis = 60000) // // / // //////// / ///////////////////
+			/// <summary>
+			/// クライアント応答用？
+			/// </summary>
+			/// <param name="timeoutMillis"></param>
+			/// <returns>null == タイムアウト又は受信に失敗</returns>
+			public byte[] Recv(int timeoutMillis = 60000) // 60 秒 -- 相手側の処理時間 + 応答が必ずあることが前提なので、長め。
 			{
 				for (int c = 0; c < timeoutMillis; c += _n._timeoutMillis)
 				{
@@ -238,11 +231,11 @@ namespace HLTStudio.Tools
 				return null;
 			}
 
-			/// /////////
-			/// //////
-			/// ////////////////////////////
-			/// //////////
-			/// ///////////////////
+			/// <summary>
+			/// サーバー用？
+			/// 受信を待機する場合、時間を空けずに繰り返し呼び出すこと。
+			/// </summary>
+			/// <returns></returns>
 			public byte[] Receipt()
 			{
 				try
@@ -266,7 +259,3 @@ namespace HLTStudio.Tools
 		}
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

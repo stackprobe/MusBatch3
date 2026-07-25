@@ -1,11 +1,4 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +8,7 @@ namespace HLTStudio.Tools
 {
 	public class Mutector : IDisposable
 	{
-		private const string COMMON_ID = "{fab3c841-8891-4273-8bd1-50525845fea7}"; // /////////////
+		private const string COMMON_ID = "{fab3c841-8891-4273-8bd1-50525845fea7}"; // shared_uuid@g
 
 		private enum M_INDEX
 		{
@@ -31,7 +24,7 @@ namespace HLTStudio.Tools
 			Bit_1_1,
 			Bit_1_2,
 
-			Max, // /// // ///////
+			Max, // num of M_INDEX
 		};
 
 		private MutexData[] _mtxs = new MutexData[(int)M_INDEX.Max];
@@ -82,7 +75,7 @@ namespace HLTStudio.Tools
 
 		public bool TrySet(int index)
 		{
-			if (_statuses[index]) throw null; // /////////
+			if (_statuses[index]) throw null; // この系は無いはず！
 
 			if (_mtxs[index].WaitForMillis(0))
 			{
@@ -94,7 +87,7 @@ namespace HLTStudio.Tools
 
 		public bool Get(int index)
 		{
-			if (_statuses[index]) throw null; // /////////
+			if (_statuses[index]) throw null; // この系は無いはず！
 
 			if (_mtxs[index].WaitForMillis(0))
 			{
@@ -113,11 +106,11 @@ namespace HLTStudio.Tools
 				_m = new Mutector(name);
 			}
 
-			/// /////////
-			/// //////////////// /////// // ///
-			/// // ////// /// // ////////
-			/// //////////
-			/// ////// ///////////////////////
+			/// <summary>
+			/// Recver.Perform() 実行中ではない -> 即例外
+			/// 別の Sender 送信中 -> 終わるまで待つ。
+			/// </summary>
+			/// <param name="message"></param>
 			public void Send(byte[] message)
 			{
 				if (message == null)
@@ -127,7 +120,7 @@ namespace HLTStudio.Tools
 
 				try
 				{
-					// //////////////// /////////
+					// Recver.Perform() 実行中かどうか検査
 					{
 						if (
 							_m.TrySet((int)M_INDEX.Sync_0) &&
@@ -207,9 +200,9 @@ namespace HLTStudio.Tools
 				_recver = recver;
 			}
 
-			/// /////////
-			/// // ////// /// // ///
-			/// //////////
+			/// <summary>
+			/// 別の Recver 受信中 -> 即例外
+			/// </summary>
 			public void Perform()
 			{
 				if (_recver == null)
@@ -248,7 +241,7 @@ namespace HLTStudio.Tools
 			{
 				_m.Set((int)M_INDEX.Sync_0 + m1, true);
 
-				// //////
+				// idling
 				{
 					if (_m.Get((int)M_INDEX.Sync_0 + m2) == false)
 					{
@@ -277,7 +270,7 @@ namespace HLTStudio.Tools
 					}
 					else if (_buff == null)
 					{
-						// ////
+						// noop
 					}
 					else if (b0)
 					{
@@ -332,12 +325,8 @@ namespace HLTStudio.Tools
 
 		public interface IRecver
 		{
-			bool Interlude(); // //// / /////
+			bool Interlude(); // ret: ? 継続する。
 			void Recved(byte[] message);
 		}
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

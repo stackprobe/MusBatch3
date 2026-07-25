@@ -1,11 +1,4 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,19 +21,19 @@ namespace HLTStudio
 
 		private class Word
 		{
-			// //// / ////
+			// Kind と Prms
 			//
-			// // / / // ///////// ///////
-			// / // // ///////////////////
-			// / // // ///////////////////
-			// / // // ////////
-			// / // // ////
-			// // // // ///////
-			// // // / // /////////////
-			// // // / // /////////////
-			// // ////// / // //////////////
-			// // ////// / // //////////////
-			// / ////// // // ///////////
+			// MC X Y == マウスカーソル移動 (@init)
+			// D VK == キー又はボタンを下げる。(@init)
+			// U VK == キー又はボタンを上げる。(@init)
+			// S VK == キー・ストローク
+			// C VK == クリック
+			// 2C VK == ダブルクリック
+			// KB VK 1 == キー・下げる。(@fin)
+			// KB VK 0 == キー・上げる。(@fin)
+			// MB mbKind 1 == ボタン・下げる。(@fin)
+			// MB mbKind 0 == ボタン・上げる。(@fin)
+			// T millis == 待ち (@init/fin)
 
 			public string Kind;
 			public int[] Prms;
@@ -109,7 +102,7 @@ namespace HLTStudio
 				}
 			}
 
-			// //// //// /////
+			// Kind Prms @init
 
 			if (Gnd.I.IgnoreVk16To18)
 				this.EraseIgnoreVk16To18();
@@ -138,7 +131,7 @@ namespace HLTStudio
 			if (Gnd.I.MouseRec == Gnd.MouseRec_e.ボタン操作のみ)
 				this.InsertMarginBetweenMCMB();
 
-			// //// //// ////
+			// Kind Prms @fin
 
 			this.ToWdTable();
 
@@ -177,9 +170,9 @@ namespace HLTStudio
 		{
 			int[] ignoreVks = new int[]
 			{
-				16, // /////
-				17, // ///////
-				18, // ///
+				16, // Shift
+				17, // Control
+				18, // Alt
 			};
 
 			for (int index = 0; index < _words.Count; index++)
@@ -198,9 +191,9 @@ namespace HLTStudio
 		{
 			int[] clickVk = new int[]
 			{
-				1, // /////
-				2, // /////
-				4, // //////
+				1, // 左クリック
+				2, // 右クリック
+				4, // 中央クリック
 			};
 
 			for (int index = 0; index < _words.Count; index++)
@@ -219,9 +212,9 @@ namespace HLTStudio
 		{
 			int[] clickVk = new int[]
 			{
-				1, // /////
-				2, // /////
-				4, // //////
+				1, // 左クリック
+				2, // 右クリック
+				4, // 中央クリック
 			};
 
 			for (int index = 0; index < _words.Count; index++)
@@ -327,25 +320,25 @@ namespace HLTStudio
 		{
 			int[] shiftVks = new int[]
 			{
-				16, // /////
-				160, // / /////
-				161, // / /////
-				17, // ///////
-				162, // / ///////
-				163, // / ///////
-				18, // ///
-				164, // / ///
-				165, // / ///
-				240, // ////////
-				91, // ///////
+				16, // Shift
+				160, // L Shift
+				161, // R Shift
+				17, // Control
+				162, // L Control
+				163, // R Control
+				18, // Alt
+				164, // L Alt
+				165, // R Alt
+				240, // CapsLock
+				91, // Windows
 			};
 
 			return shiftVks.Contains(ot.Prms[0]);
 		}
 
-		private int FindT(int tMillis, int startPos, Word target) // //// // // /// /////
+		private int FindT(int tMillis, int startPos, Word target) // ret: -1 == not found
 		{
-			if (tMillis <= 0) // ///////
+			if (tMillis <= 0) // 即タイムアウト
 				return -1;
 
 			int elapsed = 0;
@@ -358,7 +351,7 @@ namespace HLTStudio
 				{
 					elapsed += wd.Prms[0];
 
-					if (tMillis < elapsed) // / //////
+					if (tMillis < elapsed) // ? タイムアウト
 						break;
 				}
 				else if (wd.IsSame(target))
@@ -373,9 +366,9 @@ namespace HLTStudio
 		{
 			int[] clickVk = new int[]
 			{
-				1, // /////
-				2, // /////
-				4, // //////
+				1, // 左クリック
+				2, // 右クリック
+				4, // 中央クリック
 			};
 
 			for (int index = 0; index < _words.Count; index++)
@@ -418,18 +411,18 @@ namespace HLTStudio
 		{
 			int[] ignoreVks = new int[]
 			{
-				16, // /////
-				160, // / /////
-				161, // / /////
-				17, // ///////
-				162, // / ///////
-				163, // / ///////
-				18, // ///
-				164, // / ///
-				165, // / ///
-				240, // ////////
-				243, // /// //
-				244, // /// ///
+				16, // Shift
+				160, // L Shift
+				161, // R Shift
+				17, // Control
+				162, // L Control
+				163, // R Control
+				18, // Alt
+				164, // L Alt
+				165, // R Alt
+				240, // CapsLock
+				243, // IME on
+				244, // IME off
 			};
 
 			for (int index = 0; index < _words.Count; index++)
@@ -594,9 +587,9 @@ namespace HLTStudio
 		{
 			switch (vk)
 			{
-				case 1: return 1; // ////
-				case 2: return 3; // ////
-				case 4: return 2; // /////
+				case 1: return 1; // 左ボタン
+				case 2: return 3; // 右ボタン
+				case 4: return 2; // 中央ボタン
 			}
 			throw null;
 		}
@@ -608,13 +601,13 @@ namespace HLTStudio
 				Word wd1 = _words[index - 1];
 				Word wd2 = _words[index];
 
-				// // // //////// // ///////////
+				// MC MB はあるけど、MB MC は無いような気がする。
 				if (
 					(wd1.Kind == "MC" && wd2.Kind == "MB") ||
 					(wd1.Kind == "MB" && wd2.Kind == "MC")
 					)
 				{
-					_words.Insert(index, new Word("T", 5)); // ////// //////
+					_words.Insert(index, new Word("T", 5)); // insert margin
 					index++;
 				}
 			}
@@ -636,14 +629,14 @@ namespace HLTStudio
 				if (word.改行マーク)
 					row = null;
 			}
-			_words = null; // ///////
+			_words = null; // もう使わない。
 		}
 
 		private void Toまとめ()
 		{
 			const int WORD_MAX = 100;
 
-			for (int c = 0; c < 10; c++) // /// // ////////////
+			for (int c = 0; c < 10; c++) // 2bs -- 多分このループ要らない。
 			{
 				for (int index = 1; index < _wdTable.Count; index++)
 				{
@@ -661,7 +654,3 @@ namespace HLTStudio
 		}
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

@@ -1,11 +1,4 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,9 +11,9 @@ namespace HLTStudio
 {
 	static class Program
 	{
-		/// /////////
-		/// //////////// //// ///////
-		/// //////////
+		/// <summary>
+		/// アプリケーションのメイン エントリ ポイントです。
+		/// </summary>
 		[STAThread]
 		static void Main()
 		{
@@ -42,13 +35,13 @@ namespace HLTStudio
 				Gnd.I.LoadConf();
 				Gnd.I.LoadData();
 
-				// //// /
+				// orig >
 
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 				Application.Run(new MainWin());
 
-				// / ////
+				// < orig
 
 				Gnd.I.SaveData();
 
@@ -131,26 +124,22 @@ namespace HLTStudio
 
 		private static void CheckCopiedExe()
 		{
-#if false // /// / /////////
-			// ///////////////////////////// // /////////////
-				///////
+#if false // del @ 2025.12.6
+			if (File.Exists("RecInput.exe")) // リリースに含まれるファイル
+				return;
 
-			// /////////////////////////////// // / //////
-				///////
+			if (Directory.Exists(@"..\Debug")) // ? devenv
+				return;
 
-			////////////////
-				//// // / ///// ///
-				///
-				/////////////////////
-				////////////////////
-				//
+			MessageBox.Show(
+				"WHY AM I ALONE ?",
+				"",
+				MessageBoxButtons.OK,
+				MessageBoxIcon.Error
+				);
 
-			////////////////////
+			Environment.Exit(6);
 #endif
 		}
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

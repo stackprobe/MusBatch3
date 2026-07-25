@@ -1,11 +1,4 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -248,7 +241,7 @@ namespace HLTStudio.Tools
 				return new Stream(file, encoding, '\t');
 			}
 
-			// //// ////// ////
+			// ---- reader ----
 
 			private StreamReader _r = null;
 
@@ -353,7 +346,7 @@ namespace HLTStudio.Tools
 				}
 			}
 
-			// //// ////// ////
+			// ---- writer ----
 
 			private StreamWriter _w = null;
 
@@ -436,7 +429,7 @@ namespace HLTStudio.Tools
 				_row.Clear();
 			}
 
-			// ////
+			// ----
 
 			public void Dispose()
 			{
@@ -446,7 +439,3 @@ namespace HLTStudio.Tools
 		}
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

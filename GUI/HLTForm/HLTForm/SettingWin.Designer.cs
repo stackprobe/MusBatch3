@@ -1,23 +1,16 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-namespace HLTStudio
+﻿namespace HLTStudio
 {
 	partial class SettingWin
 	{
-		/// /////////
-		/// /////////////
-		/// //////////
+		/// <summary>
+		/// 必要なデザイナー変数です。
+		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 
-		/// /////////
-		/// ///////////////////////
-		/// //////////
-		/// ////// ///////////////////// //////////// ////////////// ///// ///////////
+		/// <summary>
+		/// 使用中のリソースをすべてクリーンアップします。
+		/// </summary>
+		/// <param name="disposing">マネージ リソースが破棄される場合 true、破棄されない場合は false です。</param>
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing && (components != null))
@@ -27,12 +20,12 @@ namespace HLTStudio
 			base.Dispose(disposing);
 		}
 
-		#region /////// //// //////////////
+		#region Windows フォーム デザイナーで生成されたコード
 
-		/// /////////
-		/// ///// /////////////////////////
-		/// /// /////////////////
-		/// //////////
+		/// <summary>
+		/// デザイナー サポートに必要なメソッドです。このメソッドの内容を
+		/// コード エディターで変更しないでください。
+		/// </summary>
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
@@ -71,7 +64,7 @@ namespace HLTStudio
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// /////////
+			// groupBox1
 			// 
 			this.groupBox1.Controls.Add(this.label8);
 			this.groupBox1.Controls.Add(this.StrokeMillis);
@@ -101,7 +94,7 @@ namespace HLTStudio
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "記録";
 			// 
-			// //////
+			// label8
 			// 
 			this.label8.AutoSize = true;
 			this.label8.Location = new System.Drawing.Point(6, 199);
@@ -110,7 +103,7 @@ namespace HLTStudio
 			this.label8.TabIndex = 8;
 			this.label8.Text = "再生時のキーストロークのキー押下時間(ミリ秒)";
 			// 
-			// ////////////
+			// StrokeMillis
 			// 
 			this.StrokeMillis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.StrokeMillis.Location = new System.Drawing.Point(316, 196);
@@ -123,7 +116,7 @@ namespace HLTStudio
 			this.StrokeMillis.TextChanged += new System.EventHandler(this.StrokeMillis_TextChanged);
 			this.StrokeMillis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.StrokeMillis_KeyPress);
 			// 
-			// //////
+			// label3
 			// 
 			this.label3.AutoSize = true;
 			this.label3.Location = new System.Drawing.Point(6, 67);
@@ -132,7 +125,7 @@ namespace HLTStudio
 			this.label3.TabIndex = 1;
 			this.label3.Text = "キーストロークと見なすキーの押下時間(ミリ秒)";
 			// 
-			// ///////////////
+			// RecStrokeMillis
 			// 
 			this.RecStrokeMillis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.RecStrokeMillis.Location = new System.Drawing.Point(316, 64);
@@ -145,7 +138,7 @@ namespace HLTStudio
 			this.RecStrokeMillis.TextChanged += new System.EventHandler(this.RecStrokeMillis_TextChanged);
 			this.RecStrokeMillis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RecStrokeMillis_KeyPress);
 			// 
-			// //////
+			// Recまとめ
 			// 
 			this.Recまとめ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.Recまとめ.AutoSize = true;
@@ -157,7 +150,7 @@ namespace HLTStudio
 			this.Recまとめ.UseVisualStyleBackColor = true;
 			this.Recまとめ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Recまとめ_KeyPress);
 			// 
-			// ///////////
+			// RecEndUnmin
 			// 
 			this.RecEndUnmin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.RecEndUnmin.AutoSize = true;
@@ -169,7 +162,7 @@ namespace HLTStudio
 			this.RecEndUnmin.UseVisualStyleBackColor = true;
 			this.RecEndUnmin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RecEndUnmin_KeyPress);
 			// 
-			// //////
+			// label7
 			// 
 			this.label7.AutoSize = true;
 			this.label7.Location = new System.Drawing.Point(6, 298);
@@ -178,7 +171,7 @@ namespace HLTStudio
 			this.label7.TabIndex = 14;
 			this.label7.Text = "記録時のサンプリング間隔(ミリ秒)";
 			// 
-			// ////////
+			// textBox1
 			// 
 			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBox1.Location = new System.Drawing.Point(316, 295);
@@ -191,7 +184,7 @@ namespace HLTStudio
 			this.textBox1.Text = "10";
 			this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			// 
-			// //////
+			// label6
 			// 
 			this.label6.AutoSize = true;
 			this.label6.Location = new System.Drawing.Point(6, 331);
@@ -200,7 +193,7 @@ namespace HLTStudio
 			this.label6.TabIndex = 16;
 			this.label6.Text = "再生時のサンプリング間隔(ミリ秒)";
 			// 
-			// //////////////
+			// SamplingMillis
 			// 
 			this.SamplingMillis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.SamplingMillis.Location = new System.Drawing.Point(316, 328);
@@ -213,7 +206,7 @@ namespace HLTStudio
 			this.SamplingMillis.TextChanged += new System.EventHandler(this.SamplingMillis_TextChanged);
 			this.SamplingMillis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SamplingMillis_KeyPress);
 			// 
-			// //////////
+			// RecRCtrl停止
 			// 
 			this.RecRCtrl停止.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.RecRCtrl停止.AutoSize = true;
@@ -225,7 +218,7 @@ namespace HLTStudio
 			this.RecRCtrl停止.UseVisualStyleBackColor = true;
 			this.RecRCtrl停止.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RecRCtrl停止_KeyPress);
 			// 
-			// ///////////
+			// RecStartMin
 			// 
 			this.RecStartMin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.RecStartMin.AutoSize = true;
@@ -238,7 +231,7 @@ namespace HLTStudio
 			this.RecStartMin.CheckedChanged += new System.EventHandler(this.RecStartMin_CheckedChanged);
 			this.RecStartMin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RecStartMin_KeyPress);
 			// 
-			// //////
+			// label5
 			// 
 			this.label5.AutoSize = true;
 			this.label5.Location = new System.Drawing.Point(6, 265);
@@ -247,7 +240,7 @@ namespace HLTStudio
 			this.label5.TabIndex = 12;
 			this.label5.Text = "再生時のダブルクリックのクリック間隔(ミリ秒)";
 			// 
-			// //////////////
+			// DblClickMillis
 			// 
 			this.DblClickMillis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.DblClickMillis.Location = new System.Drawing.Point(316, 262);
@@ -260,7 +253,7 @@ namespace HLTStudio
 			this.DblClickMillis.TextChanged += new System.EventHandler(this.DblClickMillis_TextChanged);
 			this.DblClickMillis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DblClickMillis_KeyPress);
 			// 
-			// ///////////
+			// ClickMillis
 			// 
 			this.ClickMillis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.ClickMillis.Location = new System.Drawing.Point(316, 229);
@@ -273,7 +266,7 @@ namespace HLTStudio
 			this.ClickMillis.TextChanged += new System.EventHandler(this.ClickMillis_TextChanged);
 			this.ClickMillis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ClickMillis_KeyPress);
 			// 
-			// //////
+			// label4
 			// 
 			this.label4.AutoSize = true;
 			this.label4.Location = new System.Drawing.Point(6, 232);
@@ -282,7 +275,7 @@ namespace HLTStudio
 			this.label4.TabIndex = 10;
 			this.label4.Text = "再生時のクリックのボタン押下時間(ミリ秒)";
 			// 
-			// //////
+			// label2
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Location = new System.Drawing.Point(6, 133);
@@ -291,7 +284,7 @@ namespace HLTStudio
 			this.label2.TabIndex = 5;
 			this.label2.Text = "ダブルクリックと見なすクリック間隔(ミリ秒)";
 			// 
-			// /////////////////
+			// RecDblClickMillis
 			// 
 			this.RecDblClickMillis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.RecDblClickMillis.Location = new System.Drawing.Point(316, 130);
@@ -304,7 +297,7 @@ namespace HLTStudio
 			this.RecDblClickMillis.TextChanged += new System.EventHandler(this.RecDblClickMillis_TextChanged);
 			this.RecDblClickMillis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RecDblClickMillis_KeyPress);
 			// 
-			// //////
+			// label1
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(6, 100);
@@ -313,7 +306,7 @@ namespace HLTStudio
 			this.label1.TabIndex = 3;
 			this.label1.Text = "クリックと見なすボタンの押下時間(ミリ秒)";
 			// 
-			// //////////////
+			// RecClickMillis
 			// 
 			this.RecClickMillis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.RecClickMillis.Location = new System.Drawing.Point(316, 97);
@@ -326,7 +319,7 @@ namespace HLTStudio
 			this.RecClickMillis.TextChanged += new System.EventHandler(this.RecClickMillis_TextChanged);
 			this.RecClickMillis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RecClickMillis_KeyPress);
 			// 
-			// ////////////////
+			// SndInputBatLocal
 			// 
 			this.SndInputBatLocal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.SndInputBatLocal.AutoSize = true;
@@ -338,7 +331,7 @@ namespace HLTStudio
 			this.SndInputBatLocal.UseVisualStyleBackColor = true;
 			this.SndInputBatLocal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SndInputBatLocal_KeyPress);
 			// 
-			// /////////
+			// groupBox2
 			// 
 			this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -352,7 +345,7 @@ namespace HLTStudio
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "再生";
 			// 
-			// ////////
+			// EndUnmin
 			// 
 			this.EndUnmin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.EndUnmin.AutoSize = true;
@@ -364,7 +357,7 @@ namespace HLTStudio
 			this.EndUnmin.UseVisualStyleBackColor = true;
 			this.EndUnmin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EndUnmin_KeyPress);
 			// 
-			// ////////
+			// StartMin
 			// 
 			this.StartMin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.StartMin.AutoSize = true;
@@ -377,7 +370,7 @@ namespace HLTStudio
 			this.StartMin.CheckedChanged += new System.EventHandler(this.StartMin_CheckedChanged);
 			this.StartMin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.StartMin_KeyPress);
 			// 
-			// ///////
+			// RCtrl中断
 			// 
 			this.RCtrl中断.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.RCtrl中断.AutoSize = true;
@@ -389,7 +382,7 @@ namespace HLTStudio
 			this.RCtrl中断.UseVisualStyleBackColor = true;
 			this.RCtrl中断.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RCtrl中断_KeyPress);
 			// 
-			// ////////
+			// BtnReset
 			// 
 			this.BtnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.BtnReset.Location = new System.Drawing.Point(555, 457);
@@ -401,7 +394,7 @@ namespace HLTStudio
 			this.BtnReset.UseVisualStyleBackColor = true;
 			this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
 			// 
-			// /////////
+			// BtnExport
 			// 
 			this.BtnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.BtnExport.Location = new System.Drawing.Point(536, 355);
@@ -412,7 +405,7 @@ namespace HLTStudio
 			this.BtnExport.UseVisualStyleBackColor = true;
 			this.BtnExport.Click += new System.EventHandler(this.BtnExport_Click);
 			// 
-			// /////////
+			// BntImport
 			// 
 			this.BntImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.BntImport.Location = new System.Drawing.Point(536, 401);
@@ -423,7 +416,7 @@ namespace HLTStudio
 			this.BntImport.UseVisualStyleBackColor = true;
 			this.BntImport.Click += new System.EventHandler(this.BntImport_Click);
 			// 
-			// //////////
+			// SettingWin
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -488,7 +481,3 @@ namespace HLTStudio
 		private System.Windows.Forms.Button BntImport;
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//

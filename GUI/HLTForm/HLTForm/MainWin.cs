@@ -1,11 +1,4 @@
-﻿// Processed by SolutionConv >>>
-//
-// 本ソースファイルは、公開時の所定の手続きとして一部のセンシティブな情報をマスキングしています。
-// 元データの機微に触れる可能性がある箇所を伏せ字化したものであり、
-// リリース版との処理内容に実質的な差異が生じない範囲で調整を加えています。
-//
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,7 +22,7 @@ namespace HLTStudio
 
 		private void MainWin_Load(object sender, EventArgs e)
 		{
-			// ////
+			// init
 			{
 				this.Cmbキーボード.SelectedIndex = 0;
 				this.Cmbマウス.SelectedIndex = 0;
@@ -49,7 +42,7 @@ namespace HLTStudio
 
 		private void MainWin_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			// ////
+			// noop
 		}
 
 		private void MainWin_FormClosed(object sender, FormClosedEventArgs e)
@@ -124,7 +117,7 @@ namespace HLTStudio
 
 		private void LoadPos()
 		{
-			if (Gnd.I.MainWin_L != -IntTools.IMAX) // / / ///
+			if (Gnd.I.MainWin_L != -IntTools.IMAX) // ? ! 未設定
 			{
 				this.Left = Gnd.I.MainWin_L;
 				this.Top = Gnd.I.MainWin_T;
@@ -151,7 +144,7 @@ namespace HLTStudio
 				{
 					f.ShowDialog(this);
 				}
-				/////////////////
+				//this.SavePos();
 				this.SaveData();
 				Gnd.I.SaveData();
 				GC.Collect();
@@ -171,7 +164,7 @@ namespace HLTStudio
 		private void 繰り返し再生するRToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			this.繰り返し再生するRToolStripMenuItem.Checked = this.繰り返し再生するRToolStripMenuItem.Checked == false;
-			this.RefreshUi(); // ///
+			this.RefreshUi(); // 2bs
 		}
 
 		private void BtnOpenOutDir_Click(object sender, EventArgs e)
@@ -182,7 +175,7 @@ namespace HLTStudio
 
 		private void Btn記録開始_Click(object sender, EventArgs e)
 		{
-			if (Gnd.I.Proc記録 != null) // / /////// ///////
+			if (Gnd.I.Proc記録 != null) // ? already started
 				return;
 
 			string recInputExe = @"..\CUI\RecInput.exe";
@@ -202,7 +195,7 @@ namespace HLTStudio
 
 		private void Btn記録停止_Click(object sender, EventArgs e)
 		{
-			if (Gnd.I.Proc記録 == null) // / /// ///////
+			if (Gnd.I.Proc記録 == null) // ? not started
 				return;
 
 			this.MT_Enabled = false;
@@ -274,7 +267,7 @@ namespace HLTStudio
 					}
 					Gnd.I.OutDir = Path.GetDirectoryName(destFile);
 
-					this.SaveData(); // ///////
+					this.SaveData(); // 設定反映！！！
 
 					BusyDlg.Perform(delegate
 					{
@@ -287,7 +280,7 @@ namespace HLTStudio
 
 		private void Btn再生開始_Click(object sender, EventArgs e)
 		{
-			if (Gnd.I.Proc再生 != null) // / /////// ///////
+			if (Gnd.I.Proc再生 != null) // ? already started
 				return;
 
 			this.MT_Enabled = false;
@@ -347,7 +340,7 @@ namespace HLTStudio
 
 		private void Btn再生中断_Click(object sender, EventArgs e)
 		{
-			if (Gnd.I.Proc再生 == null) // / /// ///////
+			if (Gnd.I.Proc再生 == null) // ? not started
 				return;
 
 			Gnd.I.Proc再生.Kill();
@@ -367,13 +360,13 @@ namespace HLTStudio
 
 		private void Btnもう一度再生する_Click(object sender, EventArgs e)
 		{
-			if (Gnd.I.Proc再生 != null) // / /////// ///////
+			if (Gnd.I.Proc再生 != null) // ? already started
 				return;
 
-			if (Gnd.I.LastRanBatFile == null) // / /// /// /////
+			if (Gnd.I.LastRanBatFile == null) // ? not ran batch
 				return;
 
-			if (File.Exists(Gnd.I.LastRanBatFile) == false) // / //// /////
+			if (File.Exists(Gnd.I.LastRanBatFile) == false) // ? lost batch
 				return;
 
 			Gnd.I.Proc再生 = CommonTools.StartProc(Gnd.I.LastRanBatFile);
@@ -453,7 +446,7 @@ namespace HLTStudio
 			if (Gnd.I.EndUnmin)
 				this.WindowState = FormWindowState.Normal;
 
-			this.SaveData(); // ///////
+			this.SaveData(); // 設定反映！！！
 
 			if (Gnd.I.LoopMode)
 			{
@@ -471,7 +464,3 @@ namespace HLTStudio
 		}
 	}
 }
-
-//
-// <<< Processed by SolutionConv
-//
