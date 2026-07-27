@@ -1,3 +1,1 @@
-CALL C:\Dev\Factory\SetEnv.bat
-Cx clean **
-RDMD /RM out
+CALL C:\Dev\Factory\bat\Dev\Clean\CommonCleanProject.bat
