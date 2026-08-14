@@ -1004,66 +1004,11 @@ namespace HLTStudio.Commons
 			return src.Concat(elements);
 		}
 
+		private const int DISK_IO_RETRY_CHANGE_ATTR_01 = 7;
+		private const int DISK_IO_RETRY_CHANGE_ATTR_02 = 10;
+		private const int DISK_IO_RETRY_CHANGE_ATTR_03 = 13;
 		private const int DISK_IO_RETRY_MAX = 20;
 		private const int DISK_IO_RETRY_DELAY_MILLIS_BASE = 10;
-
-		public static void DeletePath(string path)
-		{
-			if (path == null)
-				throw new Exception("削除しようとしたパスは定義されていません。");
-
-			if (path == "")
-				throw new Exception("削除しようとしたパスは空文字列です。");
-
-			// memo: 空白だけのファイル・フォルダ(例："\u3000")も削除できるので path.Trim() == "" はチェックしない。
-
-			if (File.Exists(path))
-			{
-				for (int retryCount = 0; ; retryCount++)
-				{
-					if (retryCount > 0)
-						Thread.Sleep(retryCount * DISK_IO_RETRY_DELAY_MILLIS_BASE);
-
-					try
-					{
-						File.Delete(path);
-					}
-					catch
-					{ }
-
-					if (!File.Exists(path))
-						break;
-
-					if (retryCount >= DISK_IO_RETRY_MAX)
-						throw new Exception($"ファイルの削除に失敗しました。パス：{path}");
-
-					ProcMain.WriteLog($"ファイルの削除をリトライします。パス：{path}");
-				}
-			}
-			else if (Directory.Exists(path))
-			{
-				for (int retryCount = 0; ; retryCount++)
-				{
-					if (retryCount > 0)
-						Thread.Sleep(retryCount * DISK_IO_RETRY_DELAY_MILLIS_BASE);
-
-					try
-					{
-						Directory.Delete(path, true);
-					}
-					catch
-					{ }
-
-					if (!Directory.Exists(path))
-						break;
-
-					if (retryCount >= DISK_IO_RETRY_MAX)
-						throw new Exception($"ディレクトリの削除に失敗しました。パス：{path}");
-
-					ProcMain.WriteLog($"ディレクトリの削除をリトライします。パス：{path}");
-				}
-			}
-		}
 
 		public static void CreateDir(string dir)
 		{
@@ -1095,6 +1040,98 @@ namespace HLTStudio.Commons
 
 				ProcMain.WriteLog($"ディレクトリの作成をリトライします。パス：{dir}");
 			}
+		}
+
+		public static void DeletePath(string path)
+		{
+			if (path == null)
+				throw new Exception("削除しようとしたパスは定義されていません。");
+
+			if (path == "")
+				throw new Exception("削除しようとしたパスは空文字列です。");
+
+			// memo: 空白だけのファイル・フォルダ(例："\u3000")も削除できるので path.Trim() == "" はチェックしない。
+
+			if (File.Exists(path))
+			{
+				for (int retryCount = 0; ; retryCount++)
+				{
+					if (retryCount > 0)
+						Thread.Sleep(retryCount * DISK_IO_RETRY_DELAY_MILLIS_BASE);
+
+					if (
+						retryCount == DISK_IO_RETRY_CHANGE_ATTR_01 ||
+						retryCount == DISK_IO_RETRY_CHANGE_ATTR_02 ||
+						retryCount == DISK_IO_RETRY_CHANGE_ATTR_03
+						)
+						AntiAttributePath(path, false);
+
+					try
+					{
+						File.Delete(path);
+					}
+					catch
+					{ }
+
+					if (!File.Exists(path))
+						break;
+
+					if (retryCount >= DISK_IO_RETRY_MAX)
+						throw new Exception($"ファイルの削除に失敗しました。パス：{path}");
+
+					ProcMain.WriteLog($"ファイルの削除をリトライします。パス：{path}");
+				}
+			}
+			else if (Directory.Exists(path))
+			{
+				for (int retryCount = 0; ; retryCount++)
+				{
+					if (retryCount > 0)
+						Thread.Sleep(retryCount * DISK_IO_RETRY_DELAY_MILLIS_BASE);
+
+					if (
+						retryCount == DISK_IO_RETRY_CHANGE_ATTR_01 ||
+						retryCount == DISK_IO_RETRY_CHANGE_ATTR_02 ||
+						retryCount == DISK_IO_RETRY_CHANGE_ATTR_03
+						)
+						AntiAttributePath(path, true);
+
+					try
+					{
+						Directory.Delete(path, true);
+					}
+					catch
+					{ }
+
+					if (!Directory.Exists(path))
+						break;
+
+					if (retryCount >= DISK_IO_RETRY_MAX)
+						throw new Exception($"ディレクトリの削除に失敗しました。パス：{path}");
+
+					ProcMain.WriteLog($"ディレクトリの削除をリトライします。パス：{path}");
+				}
+			}
+		}
+
+		private static void AntiAttributePath(string path, bool dirFlag)
+		{
+			ProcMain.WriteLog("ファイル・ディレクトリ属性の解除.1 " + dirFlag);
+			try
+			{
+				// memo: ディレクトリに対しても File.SetAttributes を使ってよい。
+
+				if (dirFlag)
+					foreach (string subPath in Directory.EnumerateFileSystemEntries(path, "*", SearchOption.AllDirectories))
+						File.SetAttributes(subPath, FileAttributes.Normal);
+
+				File.SetAttributes(path, FileAttributes.Normal);
+			}
+			catch (Exception ex)
+			{
+				ProcMain.WriteLog(ex.Message);
+			}
+			ProcMain.WriteLog("ファイル・ディレクトリ属性の解除.2");
 		}
 
 		public static void DeleteAndCreateDir(string dir)
@@ -4638,24 +4675,24 @@ namespace HLTStudio.Commons
 			}
 		}
 
-		private struct P_AS_IndexedValue<T>
+		private struct P_SS_IndexedValue<T>
 		{
 			public int Index;
 			public T Value;
 		}
 
-		public static void AnzenSort<T>(IList<T> list, Comparison<T> comp)
+		public static void StableSort<T>(IList<T> list, Comparison<T> comp)
 		{
 			int count = list.Count;
 
 			if (count < 2)
 				return;
 
-			P_AS_IndexedValue<T>[] ivList = new P_AS_IndexedValue<T>[count];
+			P_SS_IndexedValue<T>[] ivList = new P_SS_IndexedValue<T>[count];
 
 			for (int index = 0; index < count; index++)
 			{
-				ivList[index] = new P_AS_IndexedValue<T>()
+				ivList[index] = new P_SS_IndexedValue<T>()
 				{
 					Index = index,
 					Value = list[index],
@@ -4688,11 +4725,11 @@ namespace HLTStudio.Commons
 			if (count < 2)
 				return;
 
-			P_AS_IndexedValue<T>[] ivList = new P_AS_IndexedValue<T>[count];
+			P_SS_IndexedValue<T>[] ivList = new P_SS_IndexedValue<T>[count];
 
 			for (int index = 0; index < count; index++)
 			{
-				ivList[index] = new P_AS_IndexedValue<T>()
+				ivList[index] = new P_SS_IndexedValue<T>()
 				{
 					Index = index,
 					Value = list[index],
@@ -4714,7 +4751,7 @@ namespace HLTStudio.Commons
 				if (comp(ivList[w - 1].Value, ivList[r].Value) != 0)
 					ivList[w++] = ivList[r];
 
-			Array.Sort(ivList, 0, w, SCommon.GetAnonyComparer<P_AS_IndexedValue<T>>((a, b) => a.Index - b.Index));
+			Array.Sort(ivList, 0, w, SCommon.GetAnonyComparer<P_SS_IndexedValue<T>>((a, b) => a.Index - b.Index));
 
 			for (int index = 0; index < w; index++)
 				list[index] = ivList[index].Value;
@@ -5479,7 +5516,7 @@ namespace HLTStudio.Commons
 			}
 		}
 
-		public static void BubunSort<T>(IList<T> list, int offset, int size, Comparison<T> comp)
+		public static void SortRange<T>(IList<T> list, int offset, int size, Comparison<T> comp)
 		{
 			if (
 				list == null ||
@@ -5495,7 +5532,7 @@ namespace HLTStudio.Commons
 			Sort_m.CombSort(size, i => list[offset + i], (a, b) => SCommon.Swap(list, offset + a, offset + b), comp);
 		}
 
-		public static void BubunAnzenSort<T>(IList<T> list, int offset, int size, Comparison<T> comp)
+		public static void StableSortRange<T>(IList<T> list, int offset, int size, Comparison<T> comp)
 		{
 			if (
 				list == null ||
@@ -5508,11 +5545,11 @@ namespace HLTStudio.Commons
 			if (size < 2) // ? ソート不要
 				return;
 
-			P_AS_IndexedValue<T>[] ivList = new P_AS_IndexedValue<T>[size];
+			P_SS_IndexedValue<T>[] ivList = new P_SS_IndexedValue<T>[size];
 
 			for (int index = 0; index < size; index++) // 取り出す。
 			{
-				ivList[index] = new P_AS_IndexedValue<T>()
+				ivList[index] = new P_SS_IndexedValue<T>()
 				{
 					Index = index,
 					Value = list[offset + index],
@@ -5568,37 +5605,37 @@ namespace HLTStudio.Commons
 			}
 		}
 
-		public static class OpenHandle_m
+		public static class CreateHandle_m // ミューテックス・名前付きイベントを開く用モジュール(仮)
 		{
-			private const string NAME_PREFIX_LOCAL = "Local\\";
+			//private const string NAME_PREFIX_LOCAL = "Local\\";
 			private const string NAME_PREFIX_GLOBAL = "Global\\";
 
-			public static Mutex Mutex(string name)
+			public static Mutex CreateMutex(string name)
 			{
-				return new Mutex(false, NAME_PREFIX_LOCAL + name);
+				return new Mutex(false, name);
 			}
 
-			public static Mutex MutexGlobal(string name)
+			public static Mutex CreateMutexGlobal(string name)
 			{
 				return new Mutex(false, NAME_PREFIX_GLOBAL + name, out bool createNew, CreateMutexSecurityFull());
 			}
 
-			public static EventWaitHandle NamedEvent(string name)
+			public static EventWaitHandle CreateNamedEvent(string name)
 			{
-				return new EventWaitHandle(false, EventResetMode.AutoReset, NAME_PREFIX_LOCAL + name);
+				return new EventWaitHandle(false, EventResetMode.AutoReset, name);
 			}
 
-			public static EventWaitHandle NamedEventManual(string name)
+			public static EventWaitHandle CreateNamedEventManual(string name)
 			{
-				return new EventWaitHandle(false, EventResetMode.ManualReset, NAME_PREFIX_LOCAL + name);
+				return new EventWaitHandle(false, EventResetMode.ManualReset, name);
 			}
 
-			public static EventWaitHandle NamedEventGlobal(string name)
+			public static EventWaitHandle CreateNamedEventGlobal(string name)
 			{
 				return new EventWaitHandle(false, EventResetMode.AutoReset, NAME_PREFIX_GLOBAL + name, out bool createNew, CreateEventWaitHandleSecurityFull());
 			}
 
-			public static EventWaitHandle NamedEventGlobalManual(string name)
+			public static EventWaitHandle CreateNamedEventGlobalManual(string name)
 			{
 				return new EventWaitHandle(false, EventResetMode.ManualReset, NAME_PREFIX_GLOBAL + name, out bool createNew, CreateEventWaitHandleSecurityFull());
 			}
