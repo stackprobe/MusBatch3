@@ -57,13 +57,45 @@
 static void DoMouseCursor(sint x, sint y)
 {
 	INPUT i;
+	POINT pos = { x, y };
+	RECT primary = { 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN) };
+	RECT screen = primary;
 
 	zeroclear(i);
 
 	i.type = INPUT_MOUSE;
-	i.mi.dx = d2i(x * (65536.0 / GetSystemMetrics(SM_CXSCREEN)));
-	i.mi.dy = d2i(y * (65536.0 / GetSystemMetrics(SM_CYSCREEN)));
 	i.mi.dwFlags = MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE;
+
+	if(!PtInRect(&primary, pos))
+	{
+		RECT desktop;
+
+		desktop.left = GetSystemMetrics(SM_XVIRTUALSCREEN);
+		desktop.top = GetSystemMetrics(SM_YVIRTUALSCREEN);
+		desktop.right = desktop.left + GetSystemMetrics(SM_CXVIRTUALSCREEN);
+		desktop.bottom = desktop.top + GetSystemMetrics(SM_CYVIRTUALSCREEN);
+
+		if(PtInRect(&desktop, pos))
+		{
+			screen = desktop;
+			i.mi.dwFlags |= MOUSEEVENTF_VIRTUALDESK;
+		}
+	}
+
+	if(i.mi.dwFlags & MOUSEEVENTF_VIRTUALDESK)
+	{
+		int width = screen.right - screen.left;
+		int height = screen.bottom - screen.top;
+
+		// Round up to the first normalized coordinate in the target pixel.
+		i.mi.dx = (LONG)(((x - screen.left) * 65536LL + width - 1) / width);
+		i.mi.dy = (LONG)(((y - screen.top) * 65536LL + height - 1) / height);
+	}
+	else
+	{
+		i.mi.dx = d2i(x * (65536.0 / primary.right));
+		i.mi.dy = d2i(y * (65536.0 / primary.bottom));
+	}
 	i.mi.dwExtraInfo = GetMessageExtraInfo();
 
 	SendInput(1, &i, sizeof(INPUT));
